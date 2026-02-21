@@ -24,6 +24,12 @@
             --ph-purple: #9b278f;
         }
 
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
@@ -322,7 +328,6 @@
             background-color: var(--bg-white);
             object-fit: contain;
             padding: 30px;
-            box-sizing: border-box;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -369,16 +374,59 @@
 
         footer {
             background: var(--text-dark);
-            padding: 50px 0;
+            padding: 50px 0 20px;
             text-align: center;
-            color: white;
-            margin-top: 50px;
+            color: var(--bg-white);
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 10px 0;
         }
 
         .footer-logo {
             opacity: 0.9;
             max-width: 150px;
             margin-bottom: 20px;
+        }
+
+        .footer-signature {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-signature a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-signature a:hover {
+            color: var(--ph-blue);
+        }
+
+        .host-logo {
+            height: 18px;
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-signature a:hover .host-logo {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -456,6 +504,11 @@
 
             .candidates-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-signature {
+                flex-direction: column;
+                gap: 5px;
             }
         }
     </style>
@@ -569,6 +622,14 @@
             <img src="MOSQUERA.png" alt="Logo Footer Pacto Histórico" class="footer-logo">
             <p>Sede Oficial Pacto Histórico - Mosquera, Cundinamarca.</p>
             <p>© 2026. Construyendo la política de la Vida y la Esperanza.</p>
+
+            <div class="footer-signature">
+                <span>Hosting y Desarrollo por</span>
+                <a href="https://hostaddress.com" target="_blank" rel="noopener noreferrer">
+                    <img src="logo-hostaddress.png" alt="Logo Hostaddress" class="host-logo">
+                    Hostaddress
+                </a>
+            </div>
         </div>
     </footer>
 
