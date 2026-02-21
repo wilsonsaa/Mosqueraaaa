@@ -11,6 +11,7 @@
         rel="stylesheet">
 
     <style>
+        /* --- Variables CSS --- */
         :root {
             --bg-white: #ffffff;
             --bg-light-gray: #f8f9fa;
@@ -22,6 +23,12 @@
             --ph-blue: #1d388c;
             --ph-green: #009a44;
             --ph-purple: #9b278f;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
 
         body {
@@ -38,6 +45,7 @@
             margin: 0 auto;
         }
 
+        /* --- PANTALLA DE CARGA --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -104,6 +112,7 @@
             }
         }
 
+        /* --- HEADER --- */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -210,7 +219,8 @@
             border-radius: 3px;
         }
 
-        @keyframes pulseNeon {
+        /* --- ANIMACIONES --- */
+        @keyframes pulseNeonBorder {
 
             0%,
             100% {
@@ -218,52 +228,59 @@
                 box-shadow: 0 0 18px rgba(243, 146, 0, 0.6), inset 0 0 8px rgba(243, 146, 0, 0.1);
             }
 
-            10% {
-                border-color: var(--ph-orange);
-                box-shadow: 0 0 4px rgba(243, 146, 0, 0.2), inset 0 0 2px rgba(243, 146, 0, 0.05);
-            }
-
-            20% {
+            25% {
                 border-color: var(--ph-red);
                 box-shadow: 0 0 18px rgba(227, 6, 19, 0.6), inset 0 0 8px rgba(227, 6, 19, 0.1);
             }
 
-            30% {
-                border-color: var(--ph-red);
-                box-shadow: 0 0 4px rgba(227, 6, 19, 0.2), inset 0 0 2px rgba(227, 6, 19, 0.05);
-            }
-
-            40% {
+            50% {
                 border-color: var(--ph-blue);
                 box-shadow: 0 0 18px rgba(29, 56, 140, 0.6), inset 0 0 8px rgba(29, 56, 140, 0.1);
             }
 
-            50% {
-                border-color: var(--ph-blue);
-                box-shadow: 0 0 4px rgba(29, 56, 140, 0.2), inset 0 0 2px rgba(29, 56, 140, 0.05);
-            }
-
-            60% {
+            75% {
                 border-color: var(--ph-green);
                 box-shadow: 0 0 18px rgba(0, 154, 68, 0.6), inset 0 0 8px rgba(0, 154, 68, 0.1);
             }
+        }
 
-            70% {
-                border-color: var(--ph-green);
-                box-shadow: 0 0 4px rgba(0, 154, 68, 0.2), inset 0 0 2px rgba(0, 154, 68, 0.05);
+        /* NUEVA ANIMACIÓN: Resplandor neutro (sin color) para el logo superior */
+        @keyframes pulseNeutral {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(200, 200, 200, 0.3));
+                transform: scale(1);
+                opacity: 0.9;
             }
 
-            80% {
-                border-color: var(--ph-purple);
-                box-shadow: 0 0 18px rgba(155, 39, 143, 0.6), inset 0 0 8px rgba(155, 39, 143, 0.1);
-            }
-
-            90% {
-                border-color: var(--ph-purple);
-                box-shadow: 0 0 4px rgba(155, 39, 143, 0.2), inset 0 0 2px rgba(155, 39, 143, 0.05);
+            50% {
+                filter: drop-shadow(0 0 15px rgba(200, 200, 200, 0.6));
+                transform: scale(1.03);
+                opacity: 1;
             }
         }
 
+        @keyframes pulseWatermark {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(243, 146, 0, 0.4));
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            33% {
+                filter: drop-shadow(0 0 25px rgba(227, 6, 19, 0.6));
+                transform: translate(-50%, -50%) scale(1.02);
+            }
+
+            66% {
+                filter: drop-shadow(0 0 25px rgba(29, 56, 140, 0.6));
+                transform: translate(-50%, -50%) scale(0.98);
+            }
+        }
+
+        /* --- ESTILOS DEL FORMULARIO --- */
         .form-section {
             padding: 80px 0;
         }
@@ -275,12 +292,39 @@
             padding: 50px;
             border-radius: 12px;
             border: 2px solid transparent;
-            animation: pulseNeon 8s infinite ease-in-out;
+            animation: pulseNeonBorder 8s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-bg-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            max-width: 400px;
+            opacity: 0.04;
+            z-index: 0;
+            pointer-events: none;
+            animation: pulseWatermark 6s infinite ease-in-out;
+        }
+
+        /* LOGO SUPERIOR DEL FORMULARIO (Con pulso neutro) */
+        .form-top-logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 130px;
+            /* Se aplica la nueva animación neutra */
+            animation: pulseNeutral 4s infinite ease-in-out;
+            position: relative;
+            z-index: 1;
         }
 
         .form-header {
             text-align: center;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .form-header h1 {
@@ -291,6 +335,14 @@
 
         .form-header p {
             color: var(--text-gray);
+        }
+
+        .form-group,
+        .form-row,
+        .legal-notice,
+        .btn-submit {
+            position: relative;
+            z-index: 1;
         }
 
         .form-group {
@@ -331,14 +383,8 @@
             box-shadow: 0 0 15px rgba(29, 56, 140, 0.2);
         }
 
-        select.form-control:focus {
-            border-color: var(--ph-green);
-            box-shadow: 0 0 15px rgba(0, 154, 68, 0.2);
-        }
-
-        /* AVISO LEGAL */
         .legal-notice {
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.85);
             padding: 15px;
             border-radius: 6px;
             border-left: 4px solid var(--ph-blue);
@@ -346,10 +392,13 @@
             color: var(--text-gray);
             margin-bottom: 25px;
             line-height: 1.5;
+            backdrop-filter: blur(2px);
         }
 
         .legal-notice strong {
             color: var(--text-dark);
+            display: block;
+            margin-bottom: 5px;
         }
 
         .btn-submit {
@@ -463,6 +512,10 @@
                 grid-template-columns: 1fr;
                 gap: 0;
             }
+
+            .form-bg-logo {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -501,6 +554,10 @@
     <section class="form-section">
         <div class="container">
             <div class="form-container">
+                <img src="MOSQUERA.png" alt="Fondo" class="form-bg-logo">
+
+                <img src="MOSQUERA.png" alt="Pacto Histórico" class="form-top-logo">
+
                 <div class="form-header">
                     <h1>Inscripción a Mesas de Trabajo</h1>
                     <p>La construcción del Plan de Gobierno para Mosquera requiere de tus ideas. Regístrate para
@@ -508,29 +565,32 @@
                 </div>
 
                 <form id="registroForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Juan Pérez"
+                            required>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="nombre">Nombre Completo</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control"
-                                placeholder="Ej. Juan Pérez" required>
+                            <label for="documento">Número de Documento</label>
+                            <input type="text" id="documento" name="documento" class="form-control"
+                                placeholder="Solo números" required pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         </div>
                         <div class="form-group">
-                            <label for="documento">Número de Documento (CC / TI)</label>
-                            <input type="number" id="documento" name="documento" class="form-control"
-                                placeholder="Ej. 1020304050" required>
+                            <label for="celular">Número de Celular</label>
+                            <input type="text" id="celular" name="celular" class="form-control"
+                                placeholder="Ej. 3000000000" required pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="10">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="celular">Número de Celular</label>
-                            <input type="tel" id="celular" name="celular" class="form-control"
-                                placeholder="300 000 0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mesa">¿A qué mesa temática deseas unirte?</label>
+                            <label for="mesa">Mesa Temática de Interés</label>
                             <select id="mesa" name="mesa" class="form-control" required>
-                                <option value="" disabled selected>Selecciona un área de interés...</option>
+                                <option value="" disabled selected>Selecciona un área...</option>
                                 <option value="Seguridad Humana">Seguridad Humana y Convivencia</option>
                                 <option value="Justicia Ambiental">Justicia Ambiental y Ordenamiento</option>
                                 <option value="Movilidad">Movilidad y Conectividad Regional</option>
@@ -538,63 +598,176 @@
                                 <option value="Cultura y Deporte">Cultura, Deporte y Juventud</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jac_ph">Sector de Residencia (JAC o Conjunto PH)</label>
-                        <select id="jac_ph" name="jac_ph" class="form-control" required>
-                            <option value="" disabled selected>Busca y selecciona tu sector...</option>
-                            <optgroup label="Juntas de Acción Comunal (JAC) - Urbanas">
-                                <option value="JAC Centro Histórico">Centro Histórico</option>
-                                <option value="JAC El Trébol">El Trébol</option>
-                                <option value="JAC Planadas">Planadas</option>
-                                <option value="JAC Porvenir Río">Porvenir Río</option>
-                                <option value="JAC Diamante">El Diamante / Diamante Oriental</option>
-                                <option value="JAC Siete Trojes">Siete Trojes</option>
-                                <option value="JAC Villa Marcela">Villa Marcela</option>
-                                <option value="JAC La Esperanza">La Esperanza</option>
-                                <option value="JAC Praderas">Praderas</option>
-                                <option value="JAC Cartagenita">Cartagenita</option>
-                                <option value="JAC Santa Ana">Santa Ana</option>
-                                <option value="JAC San Telmo">San Telmo</option>
-                                <option value="JAC Otra (Urbana)">Otra JAC Urbana no listada</option>
-                            </optgroup>
-                            <optgroup label="Juntas de Acción Comunal (JAC) - Rurales">
-                                <option value="JAC Balsillas">Vereda Balsillas</option>
-                                <option value="JAC San Francisco">Vereda San Francisco</option>
-                                <option value="JAC San José">Vereda San José</option>
-                                <option value="JAC Los Puentes">Vereda Los Puentes</option>
-                                <option value="JAC Otra (Rural)">Otra Vereda no listada</option>
-                            </optgroup>
-                            <optgroup label="Propiedad Horizontal (PH) - Conjuntos">
-                                <option value="PH Ciudad Sabana">Ciudad Sabana</option>
-                                <option value="PH Trebolis">Trebolis</option>
-                                <option value="PH Novaterra">Novaterra</option>
-                                <option value="PH Reserva de Alcalá">Reserva de Alcalá</option>
-                                <option value="PH Solsticio">Solsticio</option>
-                                <option value="PH Quintas del Marqués">Quintas del Marqués</option>
-                                <option value="PH Serrezuela">Serrezuela</option>
-                                <option value="PH Cortijo">El Cortijo</option>
-                                <option value="PH Otro (Conjunto)">Otro Conjunto / PH no listado</option>
-                            </optgroup>
-                        </select>
+                        <div class="form-group">
+                            <label for="jac_ph">Barrio, Vereda o Conjunto</label>
+                            <input list="lista-sectores" id="jac_ph" name="jac_ph" class="form-control"
+                                placeholder="Escribe para buscar tu sector..." required>
+                            <datalist id="lista-sectores">
+                                <option value="Otro (Escriba el nombre de su sector)">
+                                <option value="JAC - Cartagenita y Minipilla">
+                                <option value="JAC - Centro Histórico">
+                                <option value="JAC - Diamante Occidental">
+                                <option value="JAC - Diamante Oriental">
+                                <option value="JAC - El Carmen">
+                                <option value="JAC - El Dorado">
+                                <option value="JAC - El Laurel">
+                                <option value="JAC - El Paraiso">
+                                <option value="JAC - El Portal del Cerrito">
+                                <option value="JAC - El Porvenir 2 Sector (Porvenir Río 2)">
+                                <option value="JAC - El Rubi">
+                                <option value="JAC - El Rubi 2">
+                                <option value="JAC - La Cumbre II">
+                                <option value="JAC - La Esperanza">
+                                <option value="JAC - La Sabana">
+                                <option value="JAC - Los Puentes (Rural)">
+                                <option value="JAC - Lucero">
+                                <option value="JAC - Orinso">
+                                <option value="JAC - Planadas">
+                                <option value="JAC - Planadas II Sector">
+                                <option value="JAC - Praderas de Mosquera 2">
+                                <option value="JAC - Santa Ana">
+                                <option value="JAC - Serrezuelita">
+                                <option value="JAC - Unidad Residencial El Cabrero">
+                                <option value="JAC - Urbanización Alicante">
+                                <option value="JAC - Urbanización Altos de San Juan">
+                                <option value="JAC - Urbanización El Condado del Duque">
+                                <option value="JAC - Urbanización El Poblado">
+                                <option value="JAC - Urbanización El Porvenir Centro">
+                                <option value="JAC - Urbanización El Remanso">
+                                <option value="JAC - Urbanización Iregui 1">
+                                <option value="JAC - Urbanización Iregui 2">
+                                <option value="JAC - Urbanización La Arboleda">
+                                <option value="JAC - Urbanización La Cabaña">
+                                <option value="JAC - Urbanización La Cartuja">
+                                <option value="JAC - Urbanización Las Villas">
+                                <option value="JAC - Urbanización Maipore">
+                                <option value="JAC - Urbanización Nueva Castilla">
+                                <option value="JAC - Urbanización Praderas">
+                                <option value="JAC - Urbanización San Sebastián">
+                                <option value="JAC - Urbanización San Telmo">
+                                <option value="JAC - Urbanización Torres de San Felipe">
+                                <option value="JAC - Urbanización Villa Daniela">
+                                <option value="JAC - Urbanización Villa Del Rocío">
+                                <option value="JAC - Urbanización Villa Lady">
+                                <option value="JAC - Urbanización Villa Yenny">
+                                <option value="JAC - Urbanización Villa Maria III Etapa">
+                                <option value="JAC - Villa Cetty">
+                                <option value="JAC - Villa del Sol">
+                                <option value="JAC - Villa Marcela">
+                                <option value="JAC - Villa Maria I">
+                                <option value="JAC - Villa Maria II">
+                                <option value="JAC - Villa Maria IV Etapa">
+                                <option value="JAC - Villa Nueva">
+                                <option value="JAC - Villa Sajonia">
+                                <option value="Vereda - Balsillas (Sector El Pencal)">
+                                <option value="Vereda - El Cerrito">
+                                <option value="Vereda - El Cerrito (Sector Managua)">
+                                <option value="Vereda - San Francisco">
+                                <option value="Vereda - San Francisco (Sector El Porvenir)">
+                                <option value="Vereda - San José (Sector La Majada)">
+                                <option value="Vereda - San Jose (Sector Parcelas)">
+                                <option value="Vereda - Siete Trojes">
+                                <option value="Vereda - Siete Trojes (Sector El Charquito)">
+                                <option value="Vereda - Siete Trojes (Sector El Charquito 2)">
+                                <option value="PH - Agrupación Balcones de Toscana">
+                                <option value="PH - Agrupación de Vivienda Azulejo">
+                                <option value="PH - Agrupación de Vivienda Colibri">
+                                <option value="PH - Agrupación de Vivienda Halcones">
+                                <option value="PH - Agrupación de Vivienda Petrel">
+                                <option value="PH - Agrupación de Vivienda Quintas de Serrezuela">
+                                <option value="PH - Agrupación de Vivienda Tingua">
+                                <option value="PH - Agrupación de Vivienda Torcaza">
+                                <option value="PH - Agrupación de Vivienda Trebol del Guali Etapa 1 y 2">
+                                <option value="PH - Agrupación de Vivienda Turpial">
+                                <option value="PH - Alejandría Parque Residencial (Todas las Etapas)">
+                                <option value="PH - Centro Comercial Balcones de Serrezuela">
+                                <option value="PH - Centro Comercial El Trebol">
+                                <option value="PH - Centro Comercial Hacienda Villanueva">
+                                <option value="PH - Centro Empresarial Clopatosky Hnos">
+                                <option value="PH - Condominio Palo Alto">
+                                <option value="PH - Condominio Rural Los Pinos">
+                                <option value="PH - Condominio Sainz de Baranda">
+                                <option value="PH - Conjunto Attalea Club Residencial">
+                                <option value="PH - Conjunto Cerrado Brezza">
+                                <option value="PH - Conjunto de Bodegas Zona Franca (Todas las Etapas)">
+                                <option value="PH - Conjunto Residencial Acanto / Acanto 2">
+                                <option value="PH - Conjunto Residencial Ambrosía">
+                                <option value="PH - Conjunto Residencial Andria Casas">
+                                <option value="PH - Conjunto Residencial Balcones de Serrezuela">
+                                <option value="PH - Conjunto Residencial Belverde 1 y 2">
+                                <option value="PH - Conjunto Residencial Camelias del Diamante">
+                                <option value="PH - Conjunto Residencial Caminos de Belen">
+                                <option value="PH - Conjunto Residencial Campiña de San Gabriel">
+                                <option value="PH - Conjunto Residencial Campobelo (Todas las Etapas)">
+                                <option value="PH - Conjunto Residencial Cortijo de Serrezuela">
+                                <option value="PH - Conjunto Residencial El Jardin">
+                                <option value="PH - Conjunto Residencial El Trebol (Todas las Etapas y Manzanas)">
+                                <option value="PH - Conjunto Residencial Eva Alameda Etapa 1">
+                                <option value="PH - Conjunto Residencial La Estancia (Todas las Etapas)">
+                                <option value="PH - Conjunto Residencial Labranti Reservado (Todas las Etapas)">
+                                <option value="PH - Conjunto Residencial Lima">
+                                <option value="PH - Conjunto Residencial Macadamia">
+                                <option
+                                    value="PH - Conjunto Residencial Novaterra (Arrayan, Brisas, Caoba, Cerezo, Cipres, Guayacan, Nogal, Roble, Zapan)">
+                                <option value="PH - Conjunto Residencial Panorama del Campo">
+                                <option value="PH - Conjunto Residencial Parques del Diamante">
+                                <option value="PH - Conjunto Residencial Porton de Mallorca">
+                                <option value="PH - Conjunto Residencial Quintas del Marquez">
+                                <option value="PH - Conjunto Residencial Reserva Campestre Casas">
+                                <option value="PH - Conjunto Residencial Reserva de Mallorca (Todas las Etapas)">
+                                <option value="PH - Conjunto Residencial Reserva de San Alejo">
+                                <option value="PH - Conjunto Residencial Reserva de Usca">
+                                <option value="PH - Conjunto Residencial Rincon de los Virreyes">
+                                <option value="PH - Conjunto Residencial Rincon del Poblado">
+                                <option value="PH - Conjunto Residencial Sendero de San Isidro">
+                                <option value="PH - Conjunto Residencial Senderos de Siete Trojes">
+                                <option value="PH - Conjunto Residencial Veronés">
+                                <option value="PH - Conjunto Residencial Villa Sofia">
+                                <option value="PH - Conjunto Residencial Zarasota">
+                                <option value="PH - Conjunto Residencial Zéfiro">
+                                <option value="PH - Conjunto Urban 17-40">
+                                <option value="PH - Edificio Icanti">
+                                <option value="PH - Edificio Infinito 1111">
+                                <option value="PH - Edificio Multifamiliar El Romano">
+                                <option value="PH - Edificio Torres de San Felipe (Todos los Bloques)">
+                                <option value="PH - El Portal Centro Logistico y Empresarial">
+                                <option value="PH - Mall Comercial Meridiano Novaterra">
+                                <option
+                                    value="PH - Parques Industriales (Occidente, Puerto Vallarta, San Nicolas, Tecplas, Rago 24, Santo Domingo)">
+                                <option value="PH - Parque Residencial Campiñas del Sol">
+                                <option value="PH - Parque Residencial Parque de San Isidro">
+                                <option value="PH - Parque Residencial Puerta del Sol">
+                                <option
+                                    value="PH - Parque Residencial Puerto Alegre, Azul, Luna, Madero, Nuevo, Plata, Vallarta">
+                                <option value="PH - Parque Residencial Reserva del Sol">
+                                <option value="PH - Parque Residencial Sol Creciente / Sol Naciente">
+                                <option value="PH - Parque Residencial Sol de la Sabana">
+                                <option value="PH - Parques de Porvenir Etapa 1">
+                                <option value="PH - Terminal Metropolitano San Jorge">
+                                <option value="PH - Toledo Apartamentos Manzana 1">
+                                <option value="PH - Urbanizacion Reserva de Alcala">
+                                <option value="PH - Urbanizacion Santillana">
+                                <option value="PH - Urbanizacion Villa Daniela II - El Dorado">
+                            </datalist>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="propuesta">Cuéntanos brevemente tu principal propuesta</label>
                         <textarea id="propuesta" name="propuesta" class="form-control" rows="3"
-                            placeholder="Escribe aquí..."></textarea>
+                            placeholder="Escribe aquí..." required></textarea>
                     </div>
 
                     <div class="legal-notice">
-                        <strong>Autorización de Tratamiento de Datos Personales (Ley 1581 de 2012):</strong> Al hacer
-                        clic en "Enviar Inscripción", usted autoriza de manera libre, previa, expresa e informada al
-                        Pacto Histórico - Sede Mosquera para recolectar, almacenar, usar, circular y suprimir sus datos
+                        <strong>Política de Tratamiento de Datos Personales (Ley 1581 de 2012)</strong>
+                        Al hacer clic en "Enviar Inscripción", autorizo de manera libre, voluntaria, previa y expresa al
+                        Pacto Histórico (Sede Mosquera) para recolectar, almacenar, usar, y circular mis datos
                         personales, en estricto cumplimiento de la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de
-                        2013 que regulan el derecho fundamental al Habeas Data en Colombia. Sus datos serán utilizados
-                        exclusivamente para fines de participación ciudadana, agendamiento a mesas de trabajo y
-                        comunicación oficial del programa de gobierno. Usted tiene derecho a conocer, actualizar,
-                        rectificar y solicitar la eliminación de su información en cualquier momento.
+                        2013 que regulan el derecho fundamental al Habeas Data en Colombia. Entiendo que estos datos
+                        serán utilizados de forma confidencial, con el propósito exclusivo de garantizar mi
+                        participación ciudadana, contactarme para las mesas de trabajo y enviarme información sobre la
+                        construcción del programa de gobierno. Declaro que conozco mi derecho a conocer, actualizar,
+                        rectificar y solicitar la supresión de mis datos en cualquier momento.
                     </div>
 
                     <button type="submit" id="btnSubmit" class="btn-submit">Enviar Inscripción</button>
@@ -612,7 +785,6 @@
     </footer>
 
     <script>
-        // Animación Inicial
         window.addEventListener('load', function () {
             const preloader = document.getElementById('preloader');
             setTimeout(function () {
@@ -621,7 +793,6 @@
             }, 800);
         });
 
-        // Menú Hamburguesa
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
         mobileMenu.addEventListener('click', () => {
@@ -629,7 +800,6 @@
             navMenu.classList.toggle('active');
         });
 
-        // Envío de Formulario
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzGsYTnO1MTEdbk5yut98-BUdiPv54uM0eGLKJLuePLBla0Q6g46zpsQUFgTZig5CRs/exec';
         const form = document.forms['registroForm'];
         const btnSubmit = document.getElementById('btnSubmit');
@@ -645,7 +815,7 @@
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert('Hubo un error al enviar tu registro. Intenta nuevamente.');
+                    alert('Hubo un error al enviar tu registro. Revisa tu conexión a internet e intenta nuevamente.');
                     btnSubmit.innerHTML = 'Enviar Inscripción';
                     btnSubmit.disabled = false;
                 });
