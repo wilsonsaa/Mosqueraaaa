@@ -1,617 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacto Histórico | El Futuro de Mosquera</title>
-
+    
     <link rel="icon" href="MOSQUERA.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- Variables CSS --- */
         :root {
-            --bg-white: #ffffff;
-            --bg-light-gray: #f8f9fa;
-            --text-dark: #1e293b;
-            --text-gray: #475569;
-            --border-color: #e2e8f0;
-            --ph-orange: #f39200;
-            --ph-red: #e30613;
-            --ph-blue: #1d388c;
-            --ph-green: #009a44;
-            --ph-purple: #9b278f;
+            --bg-white: #ffffff; --bg-light-gray: #f8f9fa; --text-dark: #1e293b; --text-gray: #475569; --border-color: #e2e8f0;
+            --ph-orange: #f39200; --ph-red: #e30613; --ph-blue: #1d388c; --ph-green: #009a44; --ph-purple: #9b278f;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* --- REGLA DE ORO RESPONSIVE --- */
+        *, *::before, *::after { box-sizing: border-box; }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            color: var(--text-dark);
-            font-weight: 800;
-            margin-top: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: var(--bg-white); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { color: var(--text-dark); font-weight: 800; margin-top: 0; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
         /* PANTALLA DE CARGA */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-white);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-
-        .preloader-logo {
-            width: 180px;
-            animation: pulseLogo 1.5s infinite;
-        }
-
-        .loading-bar {
-            width: 250px;
-            height: 5px;
-            background: var(--bg-light-gray);
-            margin-top: 30px;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loading-bar::after {
-            content: '';
-            position: absolute;
-            left: -50%;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple));
-            animation: slide 1.5s infinite ease-in-out;
-            border-radius: 5px;
-        }
-
-        @keyframes pulseLogo {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes slide {
-            0% {
-                left: -50%;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-white); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .preloader-logo { width: 180px; animation: pulseLogo 1.5s infinite; }
+        .loading-bar { width: 250px; height: 5px; background: var(--bg-light-gray); margin-top: 30px; border-radius: 5px; overflow: hidden; position: relative; }
+        .loading-bar::after { content: ''; position: absolute; left: -50%; top: 0; width: 50%; height: 100%; background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple)); animation: slide 1.5s infinite ease-in-out; border-radius: 5px; }
+        @keyframes pulseLogo { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
+        @keyframes slide { 0% { left: -50%; } 100% { left: 100%; } }
 
         /* HEADER */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 12px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.05);
-        }
+        header { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); padding: 12px 0; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.05); }
+        header .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .brand-container { display: flex; align-items: center; gap: 15px; text-decoration: none;}
+        .brand-container img { height: 50px; width: auto; object-fit: contain; }
+        .brand-divider { height: 35px; width: 2px; background-color: var(--border-color); }
+        .headquarters { font-size: 1.1rem; font-weight: 800; color: var(--ph-blue); line-height: 1.2; text-transform: uppercase;}
+        .headquarters span { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-gray); }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
-        .brand-container img {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .brand-divider {
-            height: 35px;
-            width: 2px;
-            background-color: var(--border-color);
-        }
-
-        .headquarters {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--ph-blue);
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .headquarters span {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-gray);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--ph-blue);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: var(--ph-blue);
-        }
-
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-            box-shadow: 0 0 8px var(--ph-blue);
-        }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; transition: all 0.3s ease; }
+        nav a { text-decoration: none; color: var(--text-gray); font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease; position: relative; padding-bottom: 5px; }
+        nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--ph-blue); transition: width 0.3s ease; }
+        nav a:hover, nav a.active { color: var(--ph-blue); }
+        nav a:hover::after, nav a.active::after { width: 100%; box-shadow: 0 0 8px var(--ph-blue); }
 
         /* MENÚ HAMBURGUESA */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 101;
-        }
-
-        .menu-toggle .bar {
-            width: 25px;
-            height: 3px;
-            background-color: var(--ph-blue);
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 101; }
+        .menu-toggle .bar { width: 25px; height: 3px; background-color: var(--ph-blue); transition: all 0.3s ease; border-radius: 3px; }
 
         /* BOTONES ANIMADOS */
-        .btn-animated {
-            display: inline-block;
-            padding: 16px 45px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--bg-white);
-            background: var(--ph-blue);
-            border-radius: 8px;
-            text-decoration: none;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s;
-            text-align: center;
-        }
-
-        .btn-animated::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(60deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple), var(--ph-orange));
-            background-size: 300% 300%;
-            z-index: -1;
-            border-radius: 10px;
-            animation: moveGradient 4s infinite linear;
-        }
-
-        .btn-animated:hover {
-            transform: translateY(-3px);
-        }
-
-        @keyframes moveGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+        .btn-animated { display: inline-block; padding: 16px 45px; font-size: 1.1rem; font-weight: 800; color: var(--bg-white); background: var(--ph-blue); border-radius: 8px; text-decoration: none; text-transform: uppercase; position: relative; z-index: 1; transition: transform 0.3s; text-align: center; }
+        .btn-animated::before { content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px; background: linear-gradient(60deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple), var(--ph-orange)); background-size: 300% 300%; z-index: -1; border-radius: 10px; animation: moveGradient 4s infinite linear; }
+        .btn-animated:hover { transform: translateY(-3px); }
+        @keyframes moveGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         /* ANIMACIÓN: BORDE PALPITANTE NEÓN */
         @keyframes pulseNeon {
-
-            0%,
-            100% {
-                border-color: var(--ph-orange);
-                box-shadow: 0 0 18px rgba(243, 146, 0, 0.6), inset 0 0 8px rgba(243, 146, 0, 0.1);
-            }
-
-            10% {
-                border-color: var(--ph-orange);
-                box-shadow: 0 0 4px rgba(243, 146, 0, 0.2), inset 0 0 2px rgba(243, 146, 0, 0.05);
-            }
-
-            20% {
-                border-color: var(--ph-red);
-                box-shadow: 0 0 18px rgba(227, 6, 19, 0.6), inset 0 0 8px rgba(227, 6, 19, 0.1);
-            }
-
-            30% {
-                border-color: var(--ph-red);
-                box-shadow: 0 0 4px rgba(227, 6, 19, 0.2), inset 0 0 2px rgba(227, 6, 19, 0.05);
-            }
-
-            40% {
-                border-color: var(--ph-blue);
-                box-shadow: 0 0 18px rgba(29, 56, 140, 0.6), inset 0 0 8px rgba(29, 56, 140, 0.1);
-            }
-
-            50% {
-                border-color: var(--ph-blue);
-                box-shadow: 0 0 4px rgba(29, 56, 140, 0.2), inset 0 0 2px rgba(29, 56, 140, 0.05);
-            }
-
-            60% {
-                border-color: var(--ph-green);
-                box-shadow: 0 0 18px rgba(0, 154, 68, 0.6), inset 0 0 8px rgba(0, 154, 68, 0.1);
-            }
-
-            70% {
-                border-color: var(--ph-green);
-                box-shadow: 0 0 4px rgba(0, 154, 68, 0.2), inset 0 0 2px rgba(0, 154, 68, 0.05);
-            }
-
-            80% {
-                border-color: var(--ph-purple);
-                box-shadow: 0 0 18px rgba(155, 39, 143, 0.6), inset 0 0 8px rgba(155, 39, 143, 0.1);
-            }
-
-            90% {
-                border-color: var(--ph-purple);
-                box-shadow: 0 0 4px rgba(155, 39, 143, 0.2), inset 0 0 2px rgba(155, 39, 143, 0.05);
-            }
+            0%, 100% { border-color: var(--ph-orange); box-shadow: 0 0 18px rgba(243, 146, 0, 0.6), inset 0 0 8px rgba(243, 146, 0, 0.1); }
+            10%      { border-color: var(--ph-orange); box-shadow: 0 0 4px rgba(243, 146, 0, 0.2), inset 0 0 2px rgba(243, 146, 0, 0.05); } 
+            20%      { border-color: var(--ph-red); box-shadow: 0 0 18px rgba(227, 6, 19, 0.6), inset 0 0 8px rgba(227, 6, 19, 0.1); }
+            30%      { border-color: var(--ph-red); box-shadow: 0 0 4px rgba(227, 6, 19, 0.2), inset 0 0 2px rgba(227, 6, 19, 0.05); }
+            40%      { border-color: var(--ph-blue); box-shadow: 0 0 18px rgba(29, 56, 140, 0.6), inset 0 0 8px rgba(29, 56, 140, 0.1); }
+            50%      { border-color: var(--ph-blue); box-shadow: 0 0 4px rgba(29, 56, 140, 0.2), inset 0 0 2px rgba(29, 56, 140, 0.05); }
+            60%      { border-color: var(--ph-green); box-shadow: 0 0 18px rgba(0, 154, 68, 0.6), inset 0 0 8px rgba(0, 154, 68, 0.1); }
+            70%      { border-color: var(--ph-green); box-shadow: 0 0 4px rgba(0, 154, 68, 0.2), inset 0 0 2px rgba(0, 154, 68, 0.05); }
+            80%      { border-color: var(--ph-purple); box-shadow: 0 0 18px rgba(155, 39, 143, 0.6), inset 0 0 8px rgba(155, 39, 143, 0.1); }
+            90%      { border-color: var(--ph-purple); box-shadow: 0 0 4px rgba(155, 39, 143, 0.2), inset 0 0 2px rgba(155, 39, 143, 0.05); }
         }
 
         /* SECCIONES GENERALES */
-        .hero {
-            padding: 130px 0 110px;
-            background-color: var(--bg-white);
-            text-align: center;
-        }
+        .hero { padding: 130px 0 110px; background-color: var(--bg-white); text-align: center; }
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; color: var(--text-dark); letter-spacing: -1.5px;}
+        .hero h1 span { background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        .hero p { font-size: 1.3rem; color: var(--text-gray); max-width: 800px; margin: 0 auto 40px; font-weight: 500; }
 
-        .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            color: var(--text-dark);
-            letter-spacing: -1.5px;
-        }
+        .about-party { padding: 90px 0; background-color: var(--bg-light-gray); border-top: 1px solid var(--border-color); }
+        .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--ph-blue); line-height: 1.2;}
+        .about-content p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 20px; }
+        .pilares-list { list-style: none; padding: 0; margin-top: 30px; }
+        .pilares-list li { position: relative; padding-left: 40px; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); }
+        .pilares-list li::before { content: '✓'; position: absolute; left: 0; top: -2px; width: 25px; height: 25px; border-radius: 50%; background: var(--ph-blue); color: white; display: flex; justify-content: center; align-items: center; font-size: 0.9rem; box-shadow: 0 0 10px rgba(29, 56, 140, 0.4); }
 
-        .hero h1 span {
-            background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
+        .vision-section { padding: 100px 0; background-color: var(--bg-white); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; }
+        .section-header p { color: var(--text-gray); font-size: 1.2rem; max-width: 800px; margin: 0 auto; }
 
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-gray);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-weight: 500;
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 15px;}
+        .card { background: var(--bg-white); padding: 40px 30px; border-radius: 12px; z-index: 1; display: flex; flex-direction: column; transition: transform 0.3s ease; border: 2px solid transparent; animation: pulseNeon 8s infinite ease-in-out; }
+        .card:hover { transform: translateY(-8px); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--ph-blue); }
+        .card p { color: var(--text-gray); font-size: 1.05rem; margin: 0; }
 
-        .about-party {
-            padding: 90px 0;
-            background-color: var(--bg-light-gray);
-            border-top: 1px solid var(--border-color);
-        }
+        /* SECCIÓN INVITACIÓN CANDIDATOS */
+        .promo-section { padding: 60px 0 100px; background-color: var(--bg-white); }
+        .promo-box { background: var(--bg-light-gray); padding: 50px; border-radius: 15px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .promo-text h2 { font-size: 2.5rem; color: var(--ph-blue); margin-bottom: 20px; }
+        .promo-text p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; }
 
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
+        .cta-section { padding: 100px 0; background: linear-gradient(rgba(29, 56, 140, 0.92), rgba(29, 56, 140, 0.98)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover; text-align: center; color: var(--bg-white); }
+        .cta-section h2 { color: var(--bg-white); font-size: 3rem; margin-bottom: 20px; }
+        .cta-section p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--ph-blue);
-            line-height: 1.2;
-        }
+        footer { background: var(--text-dark); padding: 50px 0; text-align: center; color: var(--bg-white); }
+        footer p { color: #94a3b8; font-size: 0.95rem; margin: 10px 0; }
+        .footer-logo { opacity: 0.9; max-width: 150px; margin-bottom: 20px; }
 
-        .about-content p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            margin-bottom: 20px;
-        }
-
-        .pilares-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-
-        .pilares-list li {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .pilares-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            top: -2px;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: var(--ph-blue);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9rem;
-            box-shadow: 0 0 10px rgba(29, 56, 140, 0.4);
-        }
-
-        .vision-section {
-            padding: 100px 0;
-            background-color: var(--bg-white);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.8rem;
-        }
-
-        .section-header p {
-            color: var(--text-gray);
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            padding: 15px;
-        }
-
-        .card {
-            background: var(--bg-white);
-            padding: 40px 30px;
-            border-radius: 12px;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-            border: 2px solid transparent;
-            animation: pulseNeon 8s infinite ease-in-out;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--ph-blue);
-        }
-
-        .card p {
-            color: var(--text-gray);
-            font-size: 1.05rem;
-            margin: 0;
-        }
-
-        .cta-section {
-            padding: 100px 0;
-            background: linear-gradient(rgba(29, 56, 140, 0.92), rgba(29, 56, 140, 0.98)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
-            text-align: center;
-            color: var(--bg-white);
-        }
-
-        .cta-section h2 {
-            color: var(--bg-white);
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        footer {
-            background: var(--text-dark);
-            padding: 50px 0;
-            text-align: center;
-            color: var(--bg-white);
-        }
-
-        footer p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin: 10px 0;
-        }
-
-        .footer-logo {
-            opacity: 0.9;
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-
-        /* RESPONSIVE */
+        /* --- RESPONSIVE / DISPOSITIVOS MÓVILES --- */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
+            .menu-toggle { display: flex; }
+            nav ul { flex-direction: column; width: 100%; position: absolute; top: 75px; left: -100%; background: var(--bg-white); padding: 20px 0; text-align: center; box-shadow: 0 10px 15px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; }
+            nav ul.active { left: 0; opacity: 1; visibility: visible; }
+            nav ul li { margin-bottom: 15px; }
+            
+            .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-            nav ul {
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 75px;
-                left: -100%;
-                background: var(--bg-white);
-                padding: 20px 0;
-                text-align: center;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-                opacity: 0;
-                visibility: hidden;
-            }
+            .brand-divider { display: none; }
+            .headquarters { font-size: 0.9rem; }
+            .headquarters span { font-size: 0.7rem; }
 
-            nav ul.active {
-                left: 0;
-                opacity: 1;
-                visibility: visible;
-            }
+            .hero { padding: 80px 0 60px; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: -0.5px; }
+            .hero p { font-size: 1.1rem; }
+            .two-columns { grid-template-columns: 1fr; gap: 40px; }
+            
+            .about-content h2, .section-header h2, .promo-text h2, .cta-section h2 { font-size: 2.2rem; }
+            .about-party, .vision-section, .cta-section, .promo-section { padding: 60px 0; }
+            
+            /* Ajuste de contenedor promo para móviles */
+            .promo-box { padding: 30px 20px; text-align: center; }
+            .promo-image img { width: 100%; max-width: 200px; }
 
-            nav ul li {
-                margin-bottom: 15px;
-            }
-
-            .menu-toggle.is-active .bar:nth-child(2) {
-                opacity: 0;
-            }
-
-            .menu-toggle.is-active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-
-            .menu-toggle.is-active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-
-            .brand-divider {
-                display: none;
-            }
-
-            .headquarters {
-                font-size: 0.9rem;
-            }
-
-            .headquarters span {
-                font-size: 0.7rem;
-            }
-
-            .hero {
-                padding: 80px 0 60px;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-                letter-spacing: -0.5px;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .two-columns {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .about-content h2,
-            .section-header h2,
-            .cta-section h2 {
-                font-size: 2.2rem;
-            }
-
-            .about-party,
-            .vision-section,
-            .cta-section {
-                padding: 60px 0;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-animated {
-                padding: 14px 30px;
-                font-size: 1rem;
-                width: 80%;
-                box-sizing: border-box;
-            }
+            .cards-grid { grid-template-columns: 1fr; }
+            .btn-animated { padding: 14px 25px; font-size: 1rem; width: 100%; }
         }
     </style>
 </head>
-
 <body>
 
     <div id="preloader">
@@ -626,7 +154,7 @@
                 <div class="brand-divider"></div>
                 <div class="headquarters">Pacto Histórico<span>Sede Mosquera</span></div>
             </a>
-
+            
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -646,9 +174,7 @@
     <section class="hero">
         <div class="container">
             <h1>Preparando a Mosquera para el <span>Nuevo Periodo</span>.</h1>
-            <p>Dejamos atrás los modelos de administración tradicionales. Es momento de proyectar el municipio hacia el
-                futuro, alineados con el Plan Presidencial de hacer de Colombia una Potencia Mundial de la Vida, con
-                tecnología, justicia social y ordenamiento ambiental.</p>
+            <p>Dejamos atrás los modelos de administración tradicionales. Es momento de proyectar el municipio hacia el futuro, alineados con el Plan Presidencial de hacer de Colombia una Potencia Mundial de la Vida, con tecnología, justicia social y ordenamiento ambiental.</p>
             <a href="#propuesta" class="btn-animated">Conoce la Propuesta</a>
         </div>
     </section>
@@ -657,23 +183,16 @@
         <div class="container two-columns">
             <div class="about-content">
                 <h2>El Plan Presidencial aplicado a nuestra Realidad</h2>
-                <p>La Presidencia ha sido clara: el desarrollo económico no puede estar por encima de la dignidad humana
-                    ni de la naturaleza. Mosquera se ha expandido rápidamente, pero ese crecimiento ha generado
-                    desigualdad, caos vial y conflictos ambientales.</p>
-                <p>Para el próximo periodo, el Pacto Histórico en Mosquera propone una reestructuración profunda basada
-                    en tres pilares del gobierno nacional:</p>
+                <p>La Presidencia ha sido clara: el desarrollo económico no puede estar por encima de la dignidad humana ni de la naturaleza. Mosquera se ha expandido rápidamente, pero ese crecimiento ha generado desigualdad, caos vial y conflictos ambientales.</p>
+                <p>Para el próximo periodo, el Pacto Histórico en Mosquera propone una reestructuración profunda basada en tres pilares del gobierno nacional:</p>
                 <ul class="pilares-list">
-                    <li><strong>Seguridad Humana Total:</strong> Atacar el delito con tecnología, pero atacar sus causas
-                        con educación y oportunidades.</li>
-                    <li><strong>Justicia Ambiental:</strong> El agua y los ecosistemas intocables frente a la expansión.
-                    </li>
-                    <li><strong>Democratización Tecnológica:</strong> Un Estado transparente, en línea y al servicio de
-                        la economía popular.</li>
+                    <li><strong>Seguridad Humana Total:</strong> Atacar el delito con tecnología, pero atacar sus causas con educación y oportunidades.</li>
+                    <li><strong>Justicia Ambiental:</strong> El agua y los ecosistemas intocables frente a la expansión.</li>
+                    <li><strong>Democratización Tecnológica:</strong> Un Estado transparente, en línea y al servicio de la economía popular.</li>
                 </ul>
             </div>
             <div class="about-image" style="text-align: center;">
-                <img src="MOSQUERA.png" alt="Pacto Histórico Símbolo"
-                    style="width: 80%; max-width: 400px; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.1));">
+                <img src="MOSQUERA.png" alt="Pacto Histórico Símbolo" style="width: 80%; max-width: 400px; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.1));">
             </div>
         </div>
     </section>
@@ -682,53 +201,39 @@
         <div class="container">
             <div class="section-header">
                 <h2>Nuestra Propuesta de Gobierno Público</h2>
-                <p>Un plan de acción integral para el próximo periodo, diseñado para enfrentar las crisis estructurales
-                    de Mosquera mediante innovación y voluntad política.</p>
+                <p>Un plan de acción integral para el próximo periodo, diseñado para enfrentar las crisis estructurales de Mosquera mediante innovación y voluntad política.</p>
             </div>
-
+            
             <div class="cards-grid">
                 <div class="card">
                     <h3>1. Seguridad Humana Integral 4.0</h3>
-                    <p>La inseguridad en nuestros barrios no se soluciona solo con fuerza, sino con prevención y control
-                        inteligente. Proponemos la creación de un <strong>Centro de Monitoreo Tecnológico</strong>
-                        interconectado y la iluminación inteligente de puntos críticos.</p>
+                    <p>La inseguridad en nuestros barrios no se soluciona solo con fuerza, sino con prevención y control inteligente. Proponemos la creación de un <strong>Centro de Monitoreo Tecnológico</strong> interconectado y la iluminación inteligente de puntos críticos.</p>
                 </div>
                 <div class="card">
                     <h3>2. Ordenamiento y Justicia Ambiental</h3>
-                    <p>Frente a las emergencias químicas y la contaminación, implementaremos un sistema de
-                        <strong>veeduría ambiental en tiempo real</strong>. Protegeremos nuestra cuenca hídrica y
-                        humedales.</p>
+                    <p>Frente a las emergencias químicas y la contaminación, implementaremos un sistema de <strong>veeduría ambiental en tiempo real</strong>. Protegeremos nuestra cuenca hídrica y humedales.</p>
                 </div>
                 <div class="card">
                     <h3>3. Movilidad Digna y Conectividad Regional</h3>
-                    <p>El colapso de la Calle 13 roba horas de vida a los mosquerunos. Nuestra propuesta exige una
-                        integración real con los proyectos regionales (Regiotram) y la creación de un <strong>Sistema de
-                            Movilidad Inteligente</strong> local.</p>
+                    <p>El colapso de la Calle 13 roba horas de vida a los mosquerunos. Nuestra propuesta exige una integración real con los proyectos regionales (Regiotram) y la creación de un <strong>Sistema de Movilidad Inteligente</strong> local.</p>
                 </div>
                 <div class="card">
                     <h3>4. Gobierno Digital y Economía Popular</h3>
-                    <p>Acabaremos con la burocracia opaca. Construiremos un <strong>Gobierno Abierto</strong> donde
-                        cualquier ciudadano pueda auditar los contratos del municipio. Además, usaremos la tecnología
-                        para impulsar la economía local.</p>
+                    <p>Acabaremos con la burocracia opaca. Construiremos un <strong>Gobierno Abierto</strong> donde cualquier ciudadano pueda auditar los contratos del municipio. Además, usaremos la tecnología para impulsar la economía local.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about-party" style="background-color: var(--bg-white); border-top: none; padding: 60px 0 100px;">
-        <div class="container two-columns"
-            style="background: var(--bg-light-gray); padding: 50px; border-radius: 15px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+    <section class="promo-section">
+        <div class="container two-columns promo-box">
             <div class="promo-text">
-                <h2 style="font-size: 2.5rem; color: var(--ph-blue); margin-bottom: 20px;">Los Rostros del Cambio</h2>
-                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px;">Contamos con un equipo de
-                    líderes y lideresas comprometidos con la transformación de Mosquera. Conoce a quienes representarán
-                    nuestra visión de justicia social, tecnología y ordenamiento ambiental en la Alcaldía, la Asamblea y
-                    el Concejo.</p>
+                <h2>Los Rostros del Cambio</h2>
+                <p>Contamos con un equipo de líderes y lideresas comprometidos con la transformación de Mosquera. Conoce a quienes representarán nuestra visión de justicia social, tecnología y ordenamiento ambiental en la Alcaldía, la Asamblea y el Concejo.</p>
                 <a href="candidatos.html" class="btn-animated">Conocer a los Candidatos</a>
             </div>
             <div class="promo-image" style="text-align: center;">
-                <img src="MOSQUERA.png" alt="Candidatos Pacto Histórico"
-                    style="width: 70%; max-width: 250px; animation: pulseLogo 3s infinite ease-in-out;">
+                <img src="MOSQUERA.png" alt="Candidatos Pacto Histórico" style="width: 70%; max-width: 250px; animation: pulseLogo 3s infinite ease-in-out;">
             </div>
         </div>
     </section>
@@ -736,8 +241,7 @@
     <section class="cta-section">
         <div class="container">
             <h2>Construyamos el Programa de Gobierno</h2>
-            <p>Esta propuesta necesita de la inteligencia colectiva. Únete a las mesas de trabajo del Pacto Histórico en
-                Mosquera y ayudemos a trazar la ruta del próximo periodo.</p>
+            <p>Esta propuesta necesita de la inteligencia colectiva. Únete a las mesas de trabajo del Pacto Histórico en Mosquera y ayudemos a trazar la ruta del próximo periodo.</p>
             <a href="mesas-trabajo.html" class="btn-animated">Inscríbete a las Mesas</a>
         </div>
     </section>
@@ -751,12 +255,12 @@
     </footer>
 
     <script>
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
-            setTimeout(function () {
+            setTimeout(function() {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
-            }, 800);
+            }, 800); 
         });
 
         const mobileMenu = document.getElementById('mobile-menu');
@@ -768,5 +272,4 @@
         });
     </script>
 </body>
-
 </html>
