@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por sumarte! | Pacto Histórico</title>
+    <link rel="icon" href="MOSQUERA.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --bg-light-gray: #f8f9fa;
+            --text-dark: #1e293b;
+            --text-gray: #475569;
+            --border-color: #e2e8f0;
+            --ph-orange: #f39200;
+            --ph-red: #e30613;
+            --ph-blue: #1d388c;
+            --ph-green: #009a44;
+            --ph-purple: #9b278f;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-light-gray);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Animación suave y de un solo color (Azul Institucional) */
+        @keyframes pulseSingleColor {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(29, 56, 140, 0.4));
+                transform: scale(1);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(29, 56, 140, 0.8));
+                transform: scale(1.03);
+            }
+        }
+
+        .success-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 0;
+        }
+
+        /* Logo con la nueva animación sobria */
+        .success-logo {
+            width: 200px;
+            margin-bottom: 30px;
+            animation: pulseSingleColor 3s infinite ease-in-out;
+        }
+
+        .success-content h1 {
+            font-size: 3rem;
+            color: var(--ph-blue);
+            margin-bottom: 15px;
+        }
+
+        .success-content p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-animated {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--bg-white);
+            background: var(--ph-blue);
+            border-radius: 8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-animated::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(60deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple), var(--ph-orange));
+            background-size: 300% 300%;
+            z-index: -1;
+            border-radius: 10px;
+            animation: moveGradient 4s infinite linear;
+        }
+
+        .btn-animated:hover {
+            transform: translateY(-3px);
+        }
+
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--ph-blue);
+            background: transparent;
+            border: 2px solid var(--ph-blue);
+            border-radius: 8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--ph-blue);
+            color: var(--bg-white);
+        }
+
+        @media (max-width: 768px) {
+            .success-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .btn-group a {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="success-content">
+        <div class="container">
+            <img src="MOSQUERA.png" alt="Éxito" class="success-logo">
+            <h1>¡Registro Exitoso!</h1>
+            <p>Tus datos y propuestas han sido enviados correctamente. Pronto nos pondremos en contacto contigo para
+                nuestra próxima asamblea de las Mesas de Trabajo en Mosquera.</p>
+
+            <div class="btn-group">
+                <a href="mesas-trabajo.html" class="btn-animated">Hacer otro registro</a>
+                <a href="index.html" class="btn-outline">Volver al Inicio</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

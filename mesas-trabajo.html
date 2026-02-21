@@ -11,7 +11,6 @@
         rel="stylesheet">
 
     <style>
-        /* --- Variables CSS --- */
         :root {
             --bg-white: #ffffff;
             --bg-light-gray: #f8f9fa;
@@ -39,7 +38,6 @@
             margin: 0 auto;
         }
 
-        /* --- PANTALLA DE CARGA --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -106,7 +104,6 @@
             }
         }
 
-        /* --- HEADER --- */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -197,7 +194,6 @@
             box-shadow: 0 0 8px var(--ph-blue);
         }
 
-        /* --- MENÚ HAMBURGUESA --- */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -214,7 +210,6 @@
             border-radius: 3px;
         }
 
-        /* --- ANIMACIÓN: BORDE PALPITANTE --- */
         @keyframes pulseNeon {
 
             0%,
@@ -269,14 +264,13 @@
             }
         }
 
-        /* --- ESTILOS DEL FORMULARIO --- */
         .form-section {
             padding: 80px 0;
         }
 
         .form-container {
             background: var(--bg-white);
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto;
             padding: 50px;
             border-radius: 12px;
@@ -342,6 +336,22 @@
             box-shadow: 0 0 15px rgba(0, 154, 68, 0.2);
         }
 
+        /* AVISO LEGAL */
+        .legal-notice {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--ph-blue);
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .legal-notice strong {
+            color: var(--text-dark);
+        }
+
         .btn-submit {
             display: block;
             width: 100%;
@@ -358,10 +368,16 @@
             margin-top: 20px;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
             background: var(--text-dark);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-submit:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         footer {
@@ -378,7 +394,6 @@
             margin-bottom: 20px;
         }
 
-        /* --- RESPONSIVE / MÓVILES --- */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
@@ -492,41 +507,97 @@
                         participar en nuestras asambleas.</p>
                 </div>
 
-                <form action="#" method="POST">
-                    <div class="form-group">
-                        <label for="nombre">Nombre Completo</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Juan Pérez" required>
+                <form id="registroForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control"
+                                placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="documento">Número de Documento (CC / TI)</label>
+                            <input type="number" id="documento" name="documento" class="form-control"
+                                placeholder="Ej. 1020304050" required>
+                        </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="celular">Número de Celular</label>
-                            <input type="tel" id="celular" class="form-control" placeholder="300 000 0000" required>
+                            <input type="tel" id="celular" name="celular" class="form-control"
+                                placeholder="300 000 0000" required>
                         </div>
                         <div class="form-group">
-                            <label for="barrio">Barrio / Vereda</label>
-                            <input type="text" id="barrio" class="form-control" placeholder="Ej. El Trébol" required>
+                            <label for="mesa">¿A qué mesa temática deseas unirte?</label>
+                            <select id="mesa" name="mesa" class="form-control" required>
+                                <option value="" disabled selected>Selecciona un área de interés...</option>
+                                <option value="Seguridad Humana">Seguridad Humana y Convivencia</option>
+                                <option value="Justicia Ambiental">Justicia Ambiental y Ordenamiento</option>
+                                <option value="Movilidad">Movilidad y Conectividad Regional</option>
+                                <option value="Economia Popular">Economía Popular y Tecnología</option>
+                                <option value="Cultura y Deporte">Cultura, Deporte y Juventud</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="mesa">¿A qué mesa temática deseas unirte?</label>
-                        <select id="mesa" class="form-control" required>
-                            <option value="" disabled selected>Selecciona un área de interés...</option>
-                            <option value="seguridad">Seguridad Humana y Convivencia</option>
-                            <option value="medio-ambiente">Justicia Ambiental y Ordenamiento</option>
-                            <option value="movilidad">Movilidad y Conectividad Regional</option>
-                            <option value="economia">Economía Popular y Tecnología</option>
-                            <option value="cultura">Cultura, Deporte y Juventud</option>
+                        <label for="jac_ph">Sector de Residencia (JAC o Conjunto PH)</label>
+                        <select id="jac_ph" name="jac_ph" class="form-control" required>
+                            <option value="" disabled selected>Busca y selecciona tu sector...</option>
+                            <optgroup label="Juntas de Acción Comunal (JAC) - Urbanas">
+                                <option value="JAC Centro Histórico">Centro Histórico</option>
+                                <option value="JAC El Trébol">El Trébol</option>
+                                <option value="JAC Planadas">Planadas</option>
+                                <option value="JAC Porvenir Río">Porvenir Río</option>
+                                <option value="JAC Diamante">El Diamante / Diamante Oriental</option>
+                                <option value="JAC Siete Trojes">Siete Trojes</option>
+                                <option value="JAC Villa Marcela">Villa Marcela</option>
+                                <option value="JAC La Esperanza">La Esperanza</option>
+                                <option value="JAC Praderas">Praderas</option>
+                                <option value="JAC Cartagenita">Cartagenita</option>
+                                <option value="JAC Santa Ana">Santa Ana</option>
+                                <option value="JAC San Telmo">San Telmo</option>
+                                <option value="JAC Otra (Urbana)">Otra JAC Urbana no listada</option>
+                            </optgroup>
+                            <optgroup label="Juntas de Acción Comunal (JAC) - Rurales">
+                                <option value="JAC Balsillas">Vereda Balsillas</option>
+                                <option value="JAC San Francisco">Vereda San Francisco</option>
+                                <option value="JAC San José">Vereda San José</option>
+                                <option value="JAC Los Puentes">Vereda Los Puentes</option>
+                                <option value="JAC Otra (Rural)">Otra Vereda no listada</option>
+                            </optgroup>
+                            <optgroup label="Propiedad Horizontal (PH) - Conjuntos">
+                                <option value="PH Ciudad Sabana">Ciudad Sabana</option>
+                                <option value="PH Trebolis">Trebolis</option>
+                                <option value="PH Novaterra">Novaterra</option>
+                                <option value="PH Reserva de Alcalá">Reserva de Alcalá</option>
+                                <option value="PH Solsticio">Solsticio</option>
+                                <option value="PH Quintas del Marqués">Quintas del Marqués</option>
+                                <option value="PH Serrezuela">Serrezuela</option>
+                                <option value="PH Cortijo">El Cortijo</option>
+                                <option value="PH Otro (Conjunto)">Otro Conjunto / PH no listado</option>
+                            </optgroup>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="propuesta">Cuéntanos brevemente tu principal propuesta</label>
-                        <textarea id="propuesta" class="form-control" rows="4" placeholder="Escribe aquí..."></textarea>
+                        <textarea id="propuesta" name="propuesta" class="form-control" rows="3"
+                            placeholder="Escribe aquí..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit">Enviar Inscripción</button>
+                    <div class="legal-notice">
+                        <strong>Autorización de Tratamiento de Datos Personales (Ley 1581 de 2012):</strong> Al hacer
+                        clic en "Enviar Inscripción", usted autoriza de manera libre, previa, expresa e informada al
+                        Pacto Histórico - Sede Mosquera para recolectar, almacenar, usar, circular y suprimir sus datos
+                        personales, en estricto cumplimiento de la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de
+                        2013 que regulan el derecho fundamental al Habeas Data en Colombia. Sus datos serán utilizados
+                        exclusivamente para fines de participación ciudadana, agendamiento a mesas de trabajo y
+                        comunicación oficial del programa de gobierno. Usted tiene derecho a conocer, actualizar,
+                        rectificar y solicitar la eliminación de su información en cualquier momento.
+                    </div>
+
+                    <button type="submit" id="btnSubmit" class="btn-submit">Enviar Inscripción</button>
                 </form>
             </div>
         </div>
@@ -541,6 +612,7 @@
     </footer>
 
     <script>
+        // Animación Inicial
         window.addEventListener('load', function () {
             const preloader = document.getElementById('preloader');
             setTimeout(function () {
@@ -549,12 +621,34 @@
             }, 800);
         });
 
+        // Menú Hamburguesa
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
-
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('is-active');
             navMenu.classList.toggle('active');
+        });
+
+        // Envío de Formulario
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzGsYTnO1MTEdbk5yut98-BUdiPv54uM0eGLKJLuePLBla0Q6g46zpsQUFgTZig5CRs/exec';
+        const form = document.forms['registroForm'];
+        const btnSubmit = document.getElementById('btnSubmit');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btnSubmit.innerHTML = 'Enviando Datos...';
+            btnSubmit.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    window.location.href = 'gracias.html';
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('Hubo un error al enviar tu registro. Intenta nuevamente.');
+                    btnSubmit.innerHTML = 'Enviar Inscripción';
+                    btnSubmit.disabled = false;
+                });
         });
     </script>
 </body>
