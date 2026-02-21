@@ -117,7 +117,7 @@
             }
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER Y NAVEGACIÓN --- */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -133,6 +133,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .brand-container {
@@ -143,7 +144,7 @@
         }
 
         .brand-container img {
-            height: 55px;
+            height: 50px;
             width: auto;
             object-fit: contain;
         }
@@ -175,6 +176,7 @@
             gap: 30px;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease;
         }
 
         nav a {
@@ -207,6 +209,23 @@
         nav a.active::after {
             width: 100%;
             box-shadow: 0 0 8px var(--ph-blue);
+        }
+
+        /* --- MENÚ HAMBURGUESA --- */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--ph-blue);
+            transition: all 0.3s ease;
+            border-radius: 3px;
         }
 
         /* --- BOTONES ANIMADOS --- */
@@ -257,7 +276,7 @@
             }
         }
 
-        /* --- ANIMACIÓN: BORDE PALPITANTE MULTICOLOR --- */
+        /* --- ANIMACIÓN: BORDE PALPITANTE --- */
         @keyframes pulseNeon {
 
             0%,
@@ -312,7 +331,7 @@
             }
         }
 
-        /* --- HERO SECTION --- */
+        /* --- SECCIONES GENERALES --- */
         .hero {
             padding: 130px 0 110px;
             background-color: var(--bg-white);
@@ -330,6 +349,7 @@
         .hero h1 span {
             background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
@@ -342,7 +362,6 @@
             font-weight: 500;
         }
 
-        /* --- SECCIÓN VISIÓN NACIONAL Y LOCAL --- */
         .about-party {
             padding: 90px 0;
             background-color: var(--bg-light-gray);
@@ -401,7 +420,6 @@
             box-shadow: 0 0 10px rgba(29, 56, 140, 0.4);
         }
 
-        /* --- SECCIÓN PROPUESTA (TARJETAS CON BORDE PALPITANTE) --- */
         .vision-section {
             padding: 100px 0;
             background-color: var(--bg-white);
@@ -425,7 +443,7 @@
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             padding: 15px;
         }
@@ -438,8 +456,6 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
-
-            /* Aplicación del borde palpitante */
             border: 2px solid transparent;
             animation: pulseNeon 8s infinite ease-in-out;
         }
@@ -460,7 +476,6 @@
             margin: 0;
         }
 
-        /* --- CALL TO ACTION --- */
         .cta-section {
             padding: 100px 0;
             background: linear-gradient(rgba(29, 56, 140, 0.92), rgba(29, 56, 140, 0.98)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
@@ -481,7 +496,6 @@
             opacity: 0.9;
         }
 
-        /* --- FOOTER --- */
         footer {
             background: var(--text-dark);
             padding: 50px 0;
@@ -501,22 +515,104 @@
             margin-bottom: 20px;
         }
 
+        /* --- RESPONSIVE / DISPOSITIVOS MÓVILES --- */
         @media (max-width: 768px) {
-            .two-columns {
-                grid-template-columns: 1fr;
-                gap: 30px;
+
+            /* Adaptación del Header y Menú Hamburguesa */
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 75px;
+                left: -100%;
+                background: var(--bg-white);
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            nav ul.active {
+                left: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul li {
+                margin-bottom: 15px;
+            }
+
+            /* Animación X del menú */
+            .menu-toggle.is-active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.is-active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-toggle.is-active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            /* Ajustes de marca móvil */
+            .brand-divider {
+                display: none;
+            }
+
+            .headquarters {
+                font-size: 0.9rem;
+            }
+
+            .headquarters span {
+                font-size: 0.7rem;
+            }
+
+            /* Ajustes de texto y espaciado móvil */
+            .hero {
+                padding: 80px 0 60px;
             }
 
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
+                letter-spacing: -0.5px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-content h2,
+            .section-header h2,
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-party,
+            .vision-section,
+            .cta-section {
+                padding: 60px 0;
             }
 
             .cards-grid {
                 grid-template-columns: 1fr;
             }
 
-            nav ul {
-                display: none;
+            .btn-animated {
+                padding: 14px 30px;
+                font-size: 1rem;
+                width: 80%;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -532,15 +628,19 @@
     <header>
         <div class="container">
             <a href="index.html" class="brand-container">
-                <img src="MOSQUERA.png" alt="Logo Pacto Histórico Mosquera">
+                <img src="MOSQUERA.png" alt="Logo Pacto Histórico">
                 <div class="brand-divider"></div>
-                <div class="headquarters">
-                    Pacto Histórico
-                    <span>Sede Mosquera</span>
-                </div>
+                <div class="headquarters">Pacto Histórico<span>Sede Mosquera</span></div>
             </a>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
             <nav>
-                <ul>
+                <ul id="nav-menu">
                     <li><a href="index.html" class="active">Inicio</a></li>
                     <li><a href="candidatos.html">Candidatos</a></li>
                     <li><a href="mesas-trabajo.html">Mesas de Trabajo</a></li>
@@ -571,8 +671,8 @@
                 <ul class="pilares-list">
                     <li><strong>Seguridad Humana Total:</strong> Atacar el delito con tecnología, pero atacar sus causas
                         con educación y oportunidades.</li>
-                    <li><strong>Justicia Ambiental:</strong> El agua y los ecosistemas de la Sabana de Occidente
-                        intocables frente a la expansión desbordada.</li>
+                    <li><strong>Justicia Ambiental:</strong> El agua y los ecosistemas intocables frente a la expansión.
+                    </li>
                     <li><strong>Democratización Tecnológica:</strong> Un Estado transparente, en línea y al servicio de
                         la economía popular.</li>
                 </ul>
@@ -597,27 +697,26 @@
                     <h3>1. Seguridad Humana Integral 4.0</h3>
                     <p>La inseguridad en nuestros barrios no se soluciona solo con fuerza, sino con prevención y control
                         inteligente. Proponemos la creación de un <strong>Centro de Monitoreo Tecnológico</strong>
-                        interconectado y la iluminación inteligente de puntos críticos. A la par, llevaremos inversión
-                        real a las juventudes para desmantelar las redes de microtráfico.</p>
+                        interconectado y la iluminación inteligente de puntos críticos.</p>
                 </div>
                 <div class="card">
                     <h3>2. Ordenamiento y Justicia Ambiental</h3>
                     <p>Frente a las emergencias químicas y la contaminación, implementaremos un sistema de
                         <strong>veeduría ambiental en tiempo real</strong>. Protegeremos nuestra cuenca hídrica y
-                        humedales, exigiendo a las industrias una transición ecológica alineada con el plan
-                        presidencial.</p>
+                        humedales.
+                    </p>
                 </div>
                 <div class="card">
                     <h3>3. Movilidad Digna y Conectividad Regional</h3>
                     <p>El colapso de la Calle 13 roba horas de vida a los mosquerunos. Nuestra propuesta exige una
                         integración real con los proyectos regionales (Regiotram) y la creación de un <strong>Sistema de
-                            Movilidad Inteligente</strong> local, además de fomentar "Hubs" de teletrabajo.</p>
+                            Movilidad Inteligente</strong> local.</p>
                 </div>
                 <div class="card">
                     <h3>4. Gobierno Digital y Economía Popular</h3>
                     <p>Acabaremos con la burocracia opaca. Construiremos un <strong>Gobierno Abierto</strong> donde
                         cualquier ciudadano pueda auditar los contratos del municipio. Además, usaremos la tecnología
-                        para impulsar a los vendedores, campesinos y pequeños comerciantes.</p>
+                        para impulsar la economía local.</p>
                 </div>
             </div>
         </div>
@@ -634,19 +733,29 @@
 
     <footer>
         <div class="container">
-            <img src="MOSQUERA.png" alt="Logo Footer Pacto Histórico" class="footer-logo">
+            <img src="MOSQUERA.png" alt="Logo Footer" class="footer-logo">
             <p>Sede Oficial Pacto Histórico - Mosquera, Cundinamarca.</p>
             <p>© 2026. Construyendo la política de la Vida y la Esperanza.</p>
         </div>
     </footer>
 
     <script>
+        // Lógica del Preloader
         window.addEventListener('load', function () {
             const preloader = document.getElementById('preloader');
             setTimeout(function () {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
             }, 800);
+        });
+
+        // Lógica del Menú Hamburguesa Móvil
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('is-active');
+            navMenu.classList.toggle('active');
         });
     </script>
 </body>
