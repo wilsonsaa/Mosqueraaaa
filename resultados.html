@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Electorales | Pacto Histórico</title>
+
+    <link rel="icon" href="MOSQUERA.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- Variables CSS --- */
+        :root {
+            --bg-white: #ffffff;
+            --bg-light-gray: #f8f9fa;
+            --text-dark: #1e293b;
+            --text-gray: #475569;
+            --border-color: #e2e8f0;
+            --ph-orange: #f39200;
+            --ph-red: #e30613;
+            --ph-blue: #1d388c;
+            --ph-green: #009a44;
+            --ph-purple: #9b278f;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- PANTALLA DE CARGA --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-white);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .preloader-logo {
+            width: 180px;
+            animation: pulseLogo 1.5s infinite;
+        }
+
+        .loading-bar {
+            width: 250px;
+            height: 5px;
+            background: var(--bg-light-gray);
+            margin-top: 30px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            left: -50%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--ph-orange), var(--ph-red), var(--ph-blue), var(--ph-green), var(--ph-purple));
+            animation: slide 1.5s infinite ease-in-out;
+            border-radius: 5px;
+        }
+
+        @keyframes pulseLogo {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes slide {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .brand-container img {
+            height: 50px;
+        }
+
+        .brand-divider {
+            height: 35px;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .headquarters {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--ph-blue);
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .headquarters span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--ph-blue);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--ph-blue);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+            box-shadow: 0 0 8px var(--ph-blue);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--ph-blue);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* --- ESTILOS DE LA PÁGINA --- */
+        .page-header {
+            text-align: center;
+            padding: 80px 0 40px;
+            background-color: var(--bg-light-gray);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--ph-blue);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENEDOR POWER BI RESPONSIVE --- */
+        .dashboard-section {
+            padding: 60px 0 100px;
+        }
+
+        /* Efecto de borde para el panel */
+        @keyframes pulseNeonBorder {
+
+            0%,
+            100% {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 0 0 2px transparent;
+            }
+
+            50% {
+                box-shadow: 0 15px 40px rgba(29, 56, 140, 0.15), 0 0 0 2px rgba(29, 56, 140, 0.3);
+            }
+        }
+
+        .powerbi-wrapper {
+            position: relative;
+            width: 100%;
+            /* Proporción 16:9 para que el panel se adapte en todos los dispositivos */
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: var(--bg-light-gray);
+            animation: pulseNeonBorder 6s infinite ease-in-out;
+            border: 1px solid var(--border-color);
+        }
+
+        .powerbi-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--text-dark);
+            padding: 50px 0 20px;
+            text-align: center;
+            color: var(--bg-white);
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 10px 0;
+        }
+
+        .footer-logo {
+            opacity: 0.9;
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-signature {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-signature a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-signature a:hover {
+            color: var(--ph-blue);
+        }
+
+        .host-logo {
+            height: 18px;
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-signature a:hover .host-logo {
+            opacity: 1;
+        }
+
+        /* --- RESPONSIVE / MÓVILES --- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 75px;
+                left: -100%;
+                background: var(--bg-white);
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            nav ul.active {
+                left: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul li {
+                margin-bottom: 15px;
+            }
+
+            .menu-toggle.is-active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.is-active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-toggle.is-active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .brand-divider {
+                display: none;
+            }
+
+            .headquarters {
+                font-size: 0.9rem;
+            }
+
+            .headquarters span {
+                font-size: 0.7rem;
+            }
+
+            .page-header {
+                padding: 50px 0 30px;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .dashboard-section {
+                padding: 40px 0 60px;
+            }
+
+            /* En móviles muy estrechos a veces el panel necesita más altura para no verse aplastado */
+            .powerbi-wrapper {
+                padding-bottom: 75%;
+            }
+
+            .footer-signature {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <img src="MOSQUERA.png" alt="Cargando" class="preloader-logo">
+        <div class="loading-bar"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="brand-container">
+                <img src="MOSQUERA.png" alt="Logo">
+                <div class="brand-divider"></div>
+                <div class="headquarters">Pacto Histórico<span>Sede Mosquera</span></div>
+            </a>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="candidatos.html">Candidatos</a></li>
+                    <li><a href="mesas-trabajo.html">Mesas de Trabajo</a></li>
+                    <li><a href="resultados.html" class="active">Resultados</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Transparencia y Datos</h1>
+            <p>Monitoreo y análisis en tiempo real de los resultados electorales. La tecnología al servicio de la
+                democracia y la auditoría ciudadana.</p>
+        </div>
+    </div>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="powerbi-wrapper">
+
+                <iframe title="Cundinamarca" width="600" height="373.5"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiYjhhMGNiNzUtNTA5NC00NTA0LWFjNDgtNWNhMGI1YTE3ZWUxIiwidCI6IjM1NTUzYWIzLTg3OGEtNDJkMC04NjZhLWM5NmQ4ZWZlZWE2OSIsImMiOjR9&pageName=a77e914b4aee8161360d"
+                    frameborder="0" allowFullScreen="true"></iframe>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <img src="MOSQUERA.png" alt="Logo Footer Pacto Histórico" class="footer-logo">
+            <p>Sede Oficial Pacto Histórico - Mosquera, Cundinamarca.</p>
+            <p>© 2026. Construyendo la política de la Vida y la Esperanza.</p>
+
+            <div class="footer-signature">
+                <span>Hosting y Desarrollo por</span>
+                <a href="https://hostaddrees.com" target="_blank" rel="noopener noreferrer">
+                    <img src="logo-hostaddress.png" alt="Logo Hostaddrees" class="host-logo">
+                    Hostaddrees
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function () {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function () {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 800);
+        });
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('is-active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
